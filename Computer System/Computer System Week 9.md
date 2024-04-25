@@ -1,5 +1,5 @@
 
-# DNS & Security 
+# Monday Lecture : DNS & Security 
 
 ## Vocabulary 
 
@@ -169,3 +169,33 @@ Client verifies certificate signature
 	using CA’s public key
 ![[Pasted image 20240422110257.png]]
 
+------------------------------------------------------------------- 
+
+# Wednesday Lecture :  Wrapping up the application layer 
+## Network system calls 
+
+### <u>Structure of a typical internet packet</u>
+![[Pasted image 20240425153601.png]]
+This is the same structure that we can observe by using *wireshark*. 
+	At first we have the message 
+		Then we add the transport layer (**focus of today lecture**)
+			Then we add the network layer 
+The message/transport is called a **segment**
+The messafe/transport/network is called a **datagram**
+
+#### <u>UDP sockets</u>
+Each UDP socket has a unique (IP address, port #) tuple.
+A process may use the same UDP socket to communicate with many remote processes. 
+<u>Example sending</u>
+![[Pasted image 20240425160324.png]]
+- We first need to make a "socket" *syscall*, ask the transport layer to open a UDP socket. This socket is automatically linked with the process. 
+- Then we need to "bind" with a particular local IP address and port number. 
+- After we can do a "sendto" *syscall*, and provide as argument **a pointer to the message**, **length** and **destination IP address** 
+- If we don't need this socket anymore, we make the "close" *syscall* 
+
+
+
+#### <u>TCP sockets</u>
+Listening & connection sockets.
+Each connection socket has a unique (local IP, local port, remote IP, remote port) tuple.
+A process must use a different TCP connection socket per remote process.
