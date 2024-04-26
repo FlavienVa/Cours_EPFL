@@ -184,18 +184,135 @@ The message/transport is called a **segment**
 The messafe/transport/network is called a **datagram**
 
 #### <u>UDP sockets</u>
-Each UDP socket has a unique (IP address, port #) tuple.
-A process may use the same UDP socket to communicate with many remote processes. 
+- Each UDP socket has a unique (IP address, port #) tuple.
+- A process may use the same UDP socket to communicate with many remote processes. 
 <u>Example sending</u>
 ![[Pasted image 20240425160324.png]]
-- We first need to make a "socket" *syscall*, ask the transport layer to open a UDP socket. This socket is automatically linked with the process. 
-- Then we need to "bind" with a particular local IP address and port number. 
-- After we can do a "sendto" *syscall*, and provide as argument **a pointer to the message**, **length** and **destination IP address** 
-- If we don't need this socket anymore, we make the "close" *syscall* 
+1. We first need to make a "socket" *syscall*, ask the transport layer to open a UDP socket. This socket is automatically linked with the process. 
+2. Then we need to "bind" with a particular local IP address and port number. 
+3. After we can do a "sendto" *syscall*, and provide as argument **a pointer to the message**, **length** and **destination IP address** 
+4. If we don't need this socket anymore, we make the "close" *syscall* 
 
-
+<u>Exemple receiving</u> 
+![[Pasted image 20240426082745.png]]
+1. Open a UDP socket (as before)
+2. Bind (as before)
+3. The process is ready to receive a message through this socket. To do this, we make a "recvfrom" *syscall*, we need to put in arguments : **buffer for the message** and the **nbr of bytes** we want to receive. 
+4. The transport layer read what ever it receive and check if a process want to receive this information (aka a process is open to receive at IP address 5.5.5.5 and port nbr 5000).
+5. If we don't need the socket any more we can "close" it. 
 
 #### <u>TCP sockets</u>
-Listening & connection sockets.
-Each connection socket has a unique (local IP, local port, remote IP, remote port) tuple.
-A process must use a different TCP connection socket per remote process.
+- Listening & connection sockets.
+- Each connection socket has a unique (local IP, local port, remote IP, remote port) tuple.
+- A process must use a different TCP connection socket per remote process.
+
+<u>Example sending</u>
+![[Pasted image 20240426083645.png]]
+1. Ask the transport layer to open a TCP socket (as before)
+2. Then "bind" (as before)
+3. The process make a connection with a TCP receiver, with the "connect" *syscall* 
+4. If the connect return successfully, the process can make a "send" *syscall* and provide in argument : **a pointer to the message** and its **length** 
+5. If the process doesn't need the socket anymore, it uses the "close" *syscall*
+
+<u>Exemple receiving</u> 
+![[Pasted image 20240426085557.png]]
+1. Ask the transport layer to open a TCP socket (as before)
+2. Then "bind" (as before)
+3. The process make a "listen" *syscall* 
+4. When a new TCP connection-setup request arrives, the transport layer reads the destination IP address and port number and see that there exist a TCP socket *listening* for this connection. Hence it passes the request to the process. 
+5. If the process chooses to accept the request, it makes an “accept” *syscall*
+6. NOW, the process is ready to receive a message through this socket. For that, it makes a "recv" *syscall* and provide in arguments : **a pointer to a buffer** and the **nbr of bytes** it want to receive. 
+7. If a packet arrives from the network layer, the transport layer reads the headers and identifies which of all the processes running at the local application layer this packet is meant for.
+8. "close" *syscall* as usual, BUT it does NOT delete the listening socket!
+
+
+## Peer-to-peer content sharing
+### Design the architecture
+
+To understand peer-to-peer(P2P) content sharing we will use this exemple: 
+![[Pasted image 20240426090518.png]]
+Consider the following scenario:
+Alice has a large file of size F, and she wants to share it with her three friends, Bob, Céline, and Dabir.
+We will examine two approaches of distributing the file:
+- a client-server approach, where Alice acts as a single server, while her friends act as clients;
+- a P2P approach, where Alice and her friends act as peers
+
+<u>Client-server approach</u> 
+If Alice want to send a file to Bob the distribution time will be equal to the transmission delay of the file over the max{first_link, second_link}. 
+![[Pasted image 20240426091221.png]]
+(u_A is Alice's upload caoacity, u_B is Bob's download capacity)
+
+Now if Alice wants to send to Bob and Celine: 
+The file distribution time is at least as large as the max of the following quantities:
+- the transmission delay of the two copies of the file over the first link
+- the transmission delay of Bob’s copy over the last link to Bob
+- the transmission delay of Céline’s copy over the last link to Céline
+![[Pasted image 20240426091513.png]]
+
+Now the three friends : 
+The file distribution time is at least as large as the max of the following quantities:
+- the transmission delay of the three copies of the file over the first link
+- the transmission delay of Bob’s copy over the last link to Bob
+- the transmission delay of Céline’s copy over the last link to Céline
+- the transmission delay of Dabir’s copy over the last link to Dabir
+![[Pasted image 20240426091601.png]]
+
+<u>P2P approach</u>
+Alice will not send copies of the file. She cuts the file into three pieces and she send one piece to each of her friends. 
+![[Pasted image 20240426091819.png]]
+Then, each friend **sends to the other friends** the pieces that they are missing.
+And this continues until all the friends have all the pieces of the file.
+
+The file distribution time will be at least as large as the max of the following quantities:
+- the transmission delay of one copy of the file over the first link; why one copy only? because Alice pushes each bit of the file once over her link;
+- then, the transmission delay of one copy of the file over the last link of each friend; why one copy? again, because each friend pulls each bit of the file once over its link;
+- there’s one more quantity to consider: the transmission delay of three copies of the file over the links of all the peers together
+
+
+<u>Compare the two approaches</u>
+![[Pasted image 20240426092052.png]] 
+![[Pasted image 20240426092129.png]]
+Yeah ! P2P is better.
+- Client-server: time increases **linearly** with the number of clients
+- Peer-to-peer: time increases **sub-linearly** with the number of peers
+
+
+### But how do we get the content?
+Each piece of content is associated with a metadata file. This is a special file that stores information about the data files, e.g., the identities of the data files. 
+
+In a P2P system, the metadata file may be stored in a centralised location, e.g., a web server, or in a peer. 
+
+#### <u>Step to retrieve content</u> 
+1. Learn metadata file ID
+2. Find metadata file location
+3. Get metadata file, read data file IDs
+4. Find data file locations
+5. Get data files (from peers)
+
+But to know where to <u>find the file</u> we need a mechanism: 
+
+<u>1. Tracker</u> 
+This is an end-system that knows the locations of the files, meaning, the IP addresses of the peers that store each file.
+--> Centralized
+
+<u>2. Distributed Hash Table (DHT)</u>
+This is a distributed system that knows the locations of the files
+	the IP addresses of the peers that store each file. 
+--> Distributed/decentralized
+
+--> Basic DHT concepts 
+	File ID space partitioned: each peer “owns” an ID range
+	Each peer knows the location of the files whose IDs it owns
+	Each peer knows its own range + the ranges owned by its neighbors
+	The DHT receives requests to locate a file ID
+	Each peer forwards the request to the neighbor whose range is closest to the target file ID
+
+
+Where could <u>the metadata file</u> be: 
+
+Option #1: On a web server.
+In this case, you don’t need to learn any ID for the metadata file.
+You just google “.torrent file for game of thrones season 1”.
+
+Option #2: The metadata file is on a peer.
+In this case, you need to learn the ID of the metadata file and learn its location by asking a tracker or a DHT.
