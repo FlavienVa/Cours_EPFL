@@ -62,9 +62,9 @@ With a single hidden layer, one can already model complicated functions. However
 	The perceptron uses a step function as activation function
 	MLPs typically rely on continuous functions 
 
-In essence, each hidden layer takes as input the output of the previous layer. For the first hidden layer, we still have : $$z_{(1)} = f(W^t_{(1)} x)$$
-For any subsequent layer l, we have : $$z_{(l)} = f(W^t_{(l)} z_{(l-1)})$$
-Finally, for a network of L layers, we compute the output as:  $$ŷ = W^t_{(L)} z_{(L-1)}$$
+In essence, each hidden layer takes as input the output of the previous layer. For the first hidden layer, we still have : $$z_{(1)} = f(W^T_{(1)} x)$$
+For any subsequent layer l, we have : $$z_{(l)} = f(W^T_{(l)} z_{(l-1)})$$
+Finally, for a network of L layers, we compute the output as:  $$ŷ = W^T_{(L)} z_{(L-1)}$$
 The process of going from the input to the output is called **the forward pass of the network**
 If we wanted to write the prediction as a single equation, it would look like: $$ŷ = W^T_{(L)}f(W^T_{(L-1)}f(W^T_{(L-2)}f(...)))$$ This is not very convenient, and it is easier to simply think of y ̂ as a function of all parameters : $$ŷ = ŷ(W)$$
 ## Training an MLP
@@ -123,7 +123,7 @@ There is a lot of SGD extension (Adagrad, ADAM,...) but very ***hard***
 
 ## From regression to classification 
 So far, we have focused on the case where the prediction is taken directly as the output of a linear model applied to the last hidden representation, i.e., $$ŷ =  W^T_{(L)}z_{(L-1)}$$
-While this is fine for a regression task, it is not ideal for a classification one, where we would like each  y ̂ (k) to represent **the probability (score)** for class k. This can be achieved via the *softmax function* (as in multi-class logistic regression)
+While this is fine for a regression task, it is not ideal for a classification one, where we would like each  $y ̂ ^{(k)}$ to represent **the probability (score)** for class k. This can be achieved via the *softmax function* (as in multi-class logistic regression)
 ![[Pasted image 20240423100105.png]]
 In this case, the empirical risk is typically defined as the cross-entropy: 
 ![[Pasted image 20240423100121.png]]

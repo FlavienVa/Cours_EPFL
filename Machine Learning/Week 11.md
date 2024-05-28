@@ -4,7 +4,7 @@
 ### Mini recap : Bag of words (BOW)
 Idea: For each sample, count the number of times each word in the dictionary appears. We build a dictionary from that and we can put it in a vector : 
 ![[Pasted image 20240507083654.png]]
-This is fine for simple tasks (when the task is *at document level* ), but I don't help for : translation, coreference resolution, text generation
+This is fine for simple tasks (when the task is *at document level* ), but I don't help for : translation, co-reference resolution, text generation
 
 ## Word representations 
 
