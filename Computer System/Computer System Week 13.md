@@ -1,4 +1,4 @@
-add # Wednesday Lecture : Virtualization 
+# Wednesday Lecture : Virtualization 
 ## Virtualization Fundamentals
 
 <u>Principle of indirection</u> (again)
@@ -40,7 +40,7 @@ A network has multiple links connecting servers
 - Link aggregation and multipathing create a virtual link with more bandwidth
 
 #### RAID 
-**AID** or "**redundant array of independent disks**" is a data storage virtualization technology that combines multiple physical disk drive components into one or more logical units for the purposes of data redundancy. 
+**RAID** or "**redundant array of independent disks**" is a data storage virtualization technology that combines multiple physical disk drive components into one or more logical units for the purposes of data redundancy. 
 ![[Pasted image 20240522085113.png]]
 M = aggregated memory 
 N = sector in the disk

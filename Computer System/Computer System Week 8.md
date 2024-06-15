@@ -10,7 +10,7 @@
 Clear separation of roles 
 	Client processes make requests
 	Server processes respond
-Servers typically tun on dedicated infrastructure 
+Servers typically run on dedicated infrastructure 
 	Used to be one or two computer 
 	Now it is often a set of data-centers
 
@@ -58,7 +58,7 @@ The web client sends an HTTP request; the web server sends an HTTP response (log
 A base file + referenced files: 
 	base files specifies structure
 	referenced files may be image, videos, scripts (to get all the content for the page)
-Each file hat it own URL
+Each file has it own URL
 	URL = name/address for web resources
 	e.g. htpps://actu.epfl.ch/image/142932/1929x1080.jpg
 

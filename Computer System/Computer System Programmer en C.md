@@ -114,7 +114,7 @@ Les tableaux fixes (les seuls disponibles en C)
 	Exemple: 
 	![[Pasted image 20240221222338.png]]
 	. 
-	Il est **fortement** recommandé d'initialisé toute la structure 
+	Il est **fortement** recommandé d'initialiser toute la structure 
 	.
 	Pour accéder à un champs on utilise ``structure.champs`` Ex: ``Personne.taille`` 
 

@@ -3,7 +3,7 @@
 
 ## Vocabulary 
 
-<u>Application Porgramming Interface</u> 
+<u>Application Programming Interface</u> 
 Syscall API : Interface between application programmer and OS for doing "privileged stuff"
 Accessing peripheral devices 
 

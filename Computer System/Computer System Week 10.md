@@ -24,7 +24,7 @@ Aka : try hard to get the data to the receiver.
 <u>Connection teardown</u>
 ![[Pasted image 20240429093432.png]]
 - Each side indicates that it is ready to close the connection 
-- Send a segment that carries a FIN dlag 
+- Send a segment that carries a FIN flag 
 - The connection is closed when both sides have sent a FIN and received and ACK
 
 <u>Acknowledgment</u> 
@@ -71,7 +71,7 @@ We want te calculation to be : empirical and conservative
 - SEQs and ACKs are always present, even if it appears unnecessary
 
 
-<u>Macimum segment size</u>
+<u>Maximum segment size</u>
 ![[Pasted image 20240429100607.png]]
 - Transport layer may create **multiple segments** to send one message
 - Dictated by the network properites
@@ -122,7 +122,7 @@ Exponential increase = slow start
 	it’s called slow, because it starts from a small window; but it’s not really slow, the window increases exponentially
 
 Linear increase = congestion avoidance
-	this term does make sense; it means that TCP expects congestion, so it increases the windowmore cautiously
+	this term does make sense; it means that TCP expects congestion, so it increases the window more cautiously
 
 ### Flow + congestion control 
 <u>Goal: not overwhelm receiver or network</u>

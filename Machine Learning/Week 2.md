@@ -27,7 +27,7 @@ cf anal I/II
 -------------------------------------------------------------------------------------------------------------------
 ## Back to real business
 So we seek to minimize the function just up (the min 1/N sum...) that we can call R(w)
-This is a convex function of w, which means that we search for parameters  w^3 such that :  (IT IS THE GREAT GRADIENT)
+This is a convex function of w, which means that we search for parameters  $w^3$ such that :  (IT IS THE GREAT GRADIENT)
 ![[Pasted image 20240227084629.png]]
 <u>To compute</u> 
 3 Hints : 
@@ -35,11 +35,11 @@ This is a convex function of w, which means that we search for parameters  w^3 s
 	- As the gradient of an average is the average of the gradients, you can focus on computing the gradient 
 	- ![[Pasted image 20240227085214.png]]
  - Hint 2 : Use the chain rule 
-	 - The upper function has the form f(g(w)), with f(g) = g^2
+	 - The upper function has the form f(g(w)), with $f(g) = g^2$
 	- You can compute its gradient as :
 	- ![[Pasted image 20240227085341.png]]
 - Hint 3 : To compute the gradient of g(w), you can make use of the following general vector derivative rule: 
-	- Given 2 vectors (a,b) in R^D
+	- Given 2 vectors (a,b) in $R^D$
 	- ![[Pasted image 20240227085529.png]]
 - For help with matrix computation see --> http://www2.imm.dtu.dk/pubdb/edoc/imm3274.pdf
 
@@ -98,7 +98,7 @@ Thus, using the chain rule we obtain the gradient :
 Setting it to zero means that : 
 ![[Pasted image 20240227094839.png]]
 
-Using the same strategy as before : $$ W^* = (X^TX)^(-1)X^tY = X^†Y$$
+Using the same strategy as before : $$ W^* = (X^TX)^{(-1)}X^tY = X^†Y$$
 ## Linear classification 
 The goal : Predict one discrete label for a given sample
 
@@ -106,7 +106,7 @@ The goal : Predict one discrete label for a given sample
 To fit the linear model to training data, the same strategy as for linear regression can be used : 
 - Given N pairs {(x_i, y_i)}, we can use the least-square loss to write : 
 - ![[Pasted image 20240227095641.png]]
-It has exactly the same formulation as before, so the solution is exactly the same : $$ w^* = (X^TX)^(-1)X^Tx $$
+It has exactly the same formulation as before, so the solution is exactly the same : $$ w^* = (X^TX)^{(-1)}X^Tx $$
 The **problem** : it output a continuous value 
 
 The **solution** : thresholding - ->

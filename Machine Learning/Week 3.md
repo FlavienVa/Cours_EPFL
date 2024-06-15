@@ -8,7 +8,7 @@ So far we have seen the following loss functions for linear regression : (but th
 - Single output dimension : $$l(û_i, u_i) = (û_i - u_i)^2$$
 - Multiple output dimensions : $$l(û_i, u_i) = ||û_i - u_i||^2$$
 <u>Empirical risk :</u> 
-The empirical risk is define as $$R({x_i},{u_i},w) = 1/N Σ l(û_i,u_i)$$Given N training samples {(x_i,y_i)}
+The empirical risk is define as $$R({x_i},{u_i},w) = 1/N Σ l(û_i,u_i)$$Given N training samples ${(x_i,y_i)}$
 
 During training, our goal is to find the parameters w (w0 and w1) that minimize empirical risk.
 
