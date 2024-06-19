@@ -46,10 +46,10 @@ Here the quadratic function fit best :)
 
 ### Leave-one-out cross-validation (LOOCV)
 For i = 1,...,N
-1. Let (x_i, y_i) be the i^th sample
-2. Temporarily remove (x_i, y_i) from the training set 
+1. Let $(x_i, y_i)$ be the $i^{th}$ sample
+2. Temporarily remove $(x_i, y_i)$ from the training set 
 3. Performing regression on the remaining N-1 samples
-4. Compute the error on (x_i, y_i)
+4. Compute the error on $(x_i, y_i)$
 
 When you have done all point, report the **average error** 
 
@@ -61,7 +61,7 @@ When you have done all point, report the **average error**
 
 
 ### k-fold cross-validation  
-THE BEST OF THE TWO WORLD askip
+THE BEST OF THE TWO WORLD askip (YES)
 Randomly split the dataset into partitions (e.g., k = 3 , shown with different colors).
 For the red partition, train on all the points not in the red partition. Compute the errors on the red points.
 etc etc....

@@ -3,24 +3,24 @@
  
 ## Nonlinear Algorithm : the nearest neighbor
 This algo is very simple and consist only of : 
-1. Compute the distance between the test sample *x* and all training amples {x_*i*}
-2. Find the sample x_NN with minimum distance 
-3. Assign the corresponding label/value y_NN to the test sample
+1. Compute the distance between the test sample *x* and all training samples ${x_i}$
+2. Find the sample $x_{NN}$ with minimum distance 
+3. Assign the corresponding label/value $y_{NN}$ to the test sample
 
-The result may change for different **distance** function (logic)
+The result may change for different **distance function** (logic)
 
 ---------------------------
 ### Interlude - Histograms
 A histogram is a D-dimensional vector such that : 
 ![[Pasted image 20240326111230.png]]
 
-Given a vector R^D in whose values are all non-negative (and at least one is strictly positive), one can obtain a histogram by dividing each value by the sum of values. 
+Given a vector $R^D$ in whose values are all non-negative (and at least one is strictly positive), one can obtain a histogram by dividing each value by the sum of values. 
 
 Exemple : 
 x = [1 2 1 2 1 1 0 0 0]^T
 --> the histogram is : x = [1/8 1/4 1/8 1/4 1/8 1/8 0 0 0]^T because the sum is 8
 
-------------------------
+***
 
 <u>Different distance function</u>
 
@@ -33,16 +33,16 @@ PROBLEM : The results may be sensitive to outliers
 
 SOLUTION : 
 ## k-Nearest Neighbors 
-"Marche à suivre (baguette baguette)": 
-1. Compute the distance between the test sample x and all training samples {x_i}
-2. Find the *k* samples {x_NN1, ...., x_NNk} with minimum distances 
+"Marche à suivre *(baguette baguette)*": 
+1. Compute the distance between the test sample x and all training samples ${x_i}$
+2. Find the *k* samples {$x_{NN1}, ...., x_{NNk}$} with minimum distances 
 3. Find the most common label among these *k* nearest neighbors (majority vote)
-4. Assign the corresponding label y_MV to the test sample
+4. Assign the corresponding label $y_{MV}$ to the test sample
 If several labels appear the same number of times among the -NN, one strategy consists of taking the one whose samples have the smallest average distance to the test sample. 
 
 <u>Regression</u>
-1. Compute the distance between the test sample x and all training samples {x_i}
-2. Find the *k* samples {x_NN1, ...., x_NNk} with minimum distances
+1. Compute the distance between the test sample x and all training samples ${x_i}$
+2. Find the *k* samples  {$x_{NN1}, ...., x_{NNk}$}  with minimum distances
 3. Compute the value ŷ for the test sample based on that of these k-NN
 
 **Two strategies** 
@@ -58,9 +58,9 @@ No learning per se! What we need is :
 - A distance function
 - A given value *k*
 
-This is referred to as a non-parametric learning method 
+This is referred to as a <u>non-parametric</u> learning method 
 - No parameters to optimize during training 
-- *k* is said to be *hyper-parameter*, set manually (or by validation (see future lecture))
+- *k* is said to be *hyper-parameter*, set manually (or by **validation** (see future lecture))
 
 Nevertheless, *k*-NN can give **very good results** 
 
@@ -114,7 +114,7 @@ Which is re-written as :
 ![[Pasted image 20240329135700.png]]
 The gradient: 
 ![[Pasted image 20240329140136.png]]
- We can group the transformed inputs {ϕ(x_i)} and the outputs {y_i} in a matrix and vector of the form: 
+ We can group the transformed inputs {$ϕ(x_i)$} and the outputs {$y_i$} in a matrix and vector of the form: 
  ![[Pasted image 20240329140307.png]]
  THEN we have: 
  ![[Pasted image 20240329140320.png]]

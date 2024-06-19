@@ -14,6 +14,7 @@ During training, our goal is to find the parameters w (w0 and w1) that minimize 
 
 Minimizing the risk :
 	This is expressed as the optimization problem :
+	
 	![[Pasted image 20240305085218.png]]
 	We can also write that the best parameters are the solution : 
 	![[Pasted image 20240305085249.png]]
