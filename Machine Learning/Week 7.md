@@ -5,7 +5,7 @@
 
 The solution to many ML algorithms ends up relying on a dot product between inputs, i.e., $$X_i^TX_j.$$
 When doing feature expansion, we then have dot products of the form $$ϕ(X_i)^T ϕ(X_j)$$ which also encodes a similarity between the two samples, but different from the original one. 
-Thus, instead of explicitly defining the mapping ϕ(), one can define a similarity function *k*(X_i,X_j)
+Thus, instead of explicitly defining the mapping ϕ(), one can define a similarity function $k(X_i,X_j)$
 
 This is called a *kernel function*. It correspond to some mapping ϕ(), but this ϕ() may be unknown. 
 

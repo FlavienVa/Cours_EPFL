@@ -62,11 +62,11 @@ As in the binary case, multi-class least-square classification suffers from the 
 
 We of course also need that for **the multi-class case.** 
 # Representing multiples classes
-As in the least-square classification case, we can use one-hot encoding to represent multi-class labels. Then we need to use a matrix W € R^(D+1) X C. In this case the probability for a class k is given by the *softmax* function : 
+As in the least-square classification case, we can use one-hot encoding to represent multi-class labels. Then we need to use a matrix W € $R^{(D+1)}*C$. In this case the probability for a class k is given by the *softmax* function : 
 ![[Pasted image 20240326101539.png]]
 The empirical risk can then be derived from the multi-class version of the cross entropy, which yields :
 ![[Pasted image 20240326101817.png]]
-	As in the binary case, a single y_*i*^(k) is 1 for every sample *i*, so we really have one term per training sample
+	As in the binary case, a single $y_i^{(k)}$ is 1 for every sample *i*, so we really have one term per training sample
 	As in the binary case, training is done by minimizing this empirical risk using <u>gradient descent</u>
 
 <u>Gradient descent: Dealing with a matrix</u>
