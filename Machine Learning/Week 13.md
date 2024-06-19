@@ -114,4 +114,4 @@ Where $Vol(A)$ is the volume of partition A, defined $\text{vol}(A) = \sum_{i \i
 This problem can then be relaxed as : 
 $$\min_{\mathbf{y}} \mathbf{y}^T (D - W) \mathbf{y}$$
 where $W ∈ ℝ^{N×N}$ is the similarity matrix between all pairs of points  
-$D ∈ ℝ^{N×N}$  is the diagonal degree matrix, with $D_{ii} = d_i $ $y$ indicates to which partition each point belongs.
+$D ∈ ℝ^{N×N}$  is the diagonal degree matrix, with $D_{ii} = d_i$ $y$ indicates to which partition each point belongs.

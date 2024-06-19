@@ -12,11 +12,11 @@ Dimensionality reduction is the task of
 	• getting a low-dimensional representation of the data
 		• sometimes at some loss of information (hopefully noise)
 ![[Pasted image 20240514092808.png]]
-Our **goal** is to find a mapping y_i = f(x_i)
-How about a **linear one** y_i = W^Tx_i
+Our **goal** is to find a mapping $y_i = f(x_i)$
+How about a **linear one** $y_i = W^Tx_i$
 ## Principal Component Analysis (PCA)
 Pearson (1901), Hotelling (1933)
-Given N samples {xi }, PCA yields a projection of the form$$y_i = W^T(x_i-mean(x))  s.t. W^TW = I_d
+Given N samples {$x_i$}, PCA yields a projection of the form$$y_i = W^T(x_i-mean(x))  s.t. W^TW = I_d
 $$
 The data is unsupervised 
 
@@ -36,21 +36,21 @@ $$
 => at the end 
 $$w_{(1)}^T C w^{(1)} = \lambda_1 w_{(1)}^T w^{(1)} = \lambda_1$$
 The resulting term on the lefthand side is the variance of the projected data
-Since we seek to maximize it, we should take w_(1) as the eigenvector corresponding to the largest eigenvalue λ_1
+Since we seek to maximize it, we should take $w_{(1)}$ as the eigenvector corresponding to the largest eigenvalue $λ_1$
 	• Because the equation above shows that the variance is equal to the eigenvalue
 
 
 ### Dealing with more than 1D projections
 To obtain an output representation that is more than 1D, i.e.,d>1 , we can perform recursively
-	• The second projection vector w_(2) corresponds to the eigenvector **C** of with the second largest eigenvalue
-	 • The third vector w_(3) to the eigenvector with the third largest eigenvalue
+	• The second projection vector $w_{(2)}$ corresponds to the eigenvector **C** of with the second largest eigenvalue
+	 • The third vector $w_{(3)}$ to the eigenvector with the third largest eigenvalue
 The matrix  **W** is obtained by concatenating the resulting vectors, i.e.,$$W =
 \begin{bmatrix}
 w^{(1)} & w^{(2)} & \cdots & w^{(d)}
 \end{bmatrix}
 \in \mathbb{R}^{D \times d}
 $$
-This guarantees to satisfy the constraint W^TW = I_d
+This guarantees to satisfy the constraint $W^TW = I_d$
 
 In the limit, one can use all dimensions, i.e., set d = D
 - There is therefore no reduction of dimensionality
@@ -61,7 +61,7 @@ In the limit, one can use all dimensions, i.e., set d = D
 Another option is to keep all the eigenvectors that correspond to non-zero eigenvalues
 - This means that the data is **truly low-dimensional**
 - E.g., this happens when we have fewer samples than dimensions (N < D )
-- The resulting {y_i} are lower dimensional ( d <D)
+- The resulting {$y_i$} are lower dimensional ( d <D)
 - But there is **no loss of information**
 ![[Pasted image 20240514141925.png]]
 In practice, one typically truncates the eigenvalues so as to discard some that are non-zero
@@ -70,7 +70,7 @@ In practice, one typically truncates the eigenvalues so as to discard some that 
 $$\sum_{j=1}^{d} \lambda_j \geq 0.9 \cdot \sum_{k=1}^{D} \lambda_k
 $$
 - assuming the eigenvalues are sorted in decreasing order
-- The resulting {y_i} have an even lower dimension
+- The resulting {$y_i$} have an even lower dimension
 
 ### Error minimization 
 This incurs some loss of information
@@ -116,7 +116,7 @@ There is, however, no reason for this to be satisfied
 	Even if the original data is centered, the data after mapping to feature space might not be
 To handle the more realistic scenario where it isn’t, let us define :$$\widetilde{\phi}(x_i) = \phi(x_i) - \frac{1}{N} \sum_{j=1}^{N} \phi(x_j)
 $$
-The (i,j) elements of the corresponding kernel matrix is then given by : $$\widetilde{K}_{i,j} = \widetilde{\phi}(x_i)^T \widetilde{\phi}(x_j)
+The $(i,j)$ elements of the corresponding kernel matrix is then given by : $$\widetilde{K}_{i,j} = \widetilde{\phi}(x_i)^T \widetilde{\phi}(x_j)
 $$
 This kernel matrix can in fact be computed based on the original one as :$$\widetilde{K} = K -1_NK - K1_N +1_NK1_N$$Where $1_N$ is an *N x N* matrix with every element equal to 1/N
 
@@ -164,7 +164,7 @@ To avoid this, one can add noise to the input and aim to reconstruct a noise-fre
 
 ### Sparse autoencoder
 Another approach to learn a meaningful latent representation consists of adding a regularizer
-Let $y_i$ denote the latent representation (or code) for sample i
+Let $y_i$ denote the latent representation (or code) for sample $i$
 Then, one can encourage a large number of the elements $y_i^{(k)}$to go to zero
 This can be achieved by a sparsity-inducing regularizer, such as the $L_1$ norm$$E_r(\{W^{(j)}\}) = \sum_{i=1}^{N} \sum_{k=1}^{M} |y^{(k)}_i|$$
 ### Convolutional autoencoder

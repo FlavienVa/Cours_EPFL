@@ -1,1 +1,5 @@
-obsidian.*
+# Ignore all .obsidian files
+.obsidian*
+
+# Ignore the .obsidian directory and its contents
+.obsidian/

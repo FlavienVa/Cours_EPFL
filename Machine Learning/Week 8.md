@@ -129,7 +129,7 @@ Goal: Scale each individual attribute/feature dimension to fall within a **speci
 	For each feature dimension d, compute the normalized feature
 	![[Pasted image 20240416094840.png]]
 
-!!! Normalization of the data is not always necessary, it may or may not help depending on the data at hand and the ML algo
+***!!!*** Normalization of the data is not always necessary, it may or may not help depending on the data at hand and the ML algo
 
 # Class imbalance and solution to address it
 **Example of imbalanced data:** 
@@ -156,8 +156,8 @@ We have to main approches to act on this imbalanced data :
 In this method we act on the **data**
 
 We can compensate the lack of data by : 
-1. Increase dataset
-	Generate new data points for the smallest class
+1. Decrease dataset
+	Remove redundant data points form the largest class 
 	.
 	Naive (random) undersampling: 
 		Randomly remove samples from the largest class until until you obtain a balanced data set 
@@ -168,8 +168,8 @@ We can compensate the lack of data by :
 		![[Pasted image 20240416102511.png]]
 
 
-2. Decrease dataset
-	Remove redundant data points form the largest class 
+2. Increase dataset
+	Generate new data points for the smallest class
 	Naive (random) oversampling 
 		Replicate the data samples from the smallest class until obtain a balanced data set 
 		Drawback : May lead to overfitting
@@ -180,9 +180,9 @@ We can compensate the lack of data by :
 
 ### Cost-sensitive Methods 
 <u>Empirical risk</u> 
-Given *N* training samples {(x_i, y_i)}, the empirical risk is defined as : 
+Given *N* training samples {$(x_i, y_i)$}, the empirical risk is defined as : 
 ![[Pasted image 20240416103203.png]]
-In general, each loss term *l*(y_i, y_i) **has the same influence**
+In general, each loss term $l(y_i, y_i)$ **has the same influence**
 With imbalanced data, this means that most of the empirical risk comes from the largest class. 
 
 So a simple solution to this problem is to re-weighting the samples, to put **more emphasis** on *the rare class* 

@@ -1,7 +1,7 @@
 # Multilayer perceptron (MLP) model
 
 The representations and data processing strategies we have discussed so far were all **manually designed**. There is, however, no guarantee that they are the best representations for the task at hand. Ideally, one would therefore like to learn the representation jointly with the classifier.
---> Artificial neural networks are a way to do so
+**-->** Artificial neural networks are a way to do so
 
 
 ### Motivating exemple : Curve fitting
@@ -51,7 +51,7 @@ The prediction can then be written as :
 
 This resulting in a simple artificial neural network with one hidden layer can be depicted as : 
 ![[Pasted image 20240423085259.png]]
-Here if we look a the first hidden unit we see a line with all the input because it **depends** of all the input (x1...xD)
+Here if we look a the first hidden unit we see a line with all the input because it **depends** of all the input $(x^1...x^D)$
 
 Because we use a matrix-vector product for each layer, the layers are called *fully-connected* (in this course will we only do fully connected)
 
@@ -80,7 +80,7 @@ Because the empirical risk is an average over the training samples, its gradient
 .... It is very complex and wont be at the exam .... (so I will just skip to the end result)
 
 --> Algo : 
-1. Propagate x_i forward through the network
+1. Propagate $x_i$ forward through the network
 2. Compute δ(L) depending on the loss
 3. Propagate δ(L) backward to obtain each δ(l)
 4. At each layer, compute the partial derivatives
@@ -127,5 +127,5 @@ While this is fine for a regression task, it is not ideal for a classification o
 ![[Pasted image 20240423100105.png]]
 In this case, the empirical risk is typically defined as the cross-entropy: 
 ![[Pasted image 20240423100121.png]]
-Backpropagation then requires computing the derivative of the cross-entropy w.r.t. each y^(k) and the derivative of the softmax function w.r.t. each W^(j,k)_(L)_
+Backpropagation then requires computing the derivative of the cross-entropy w.r.t. each $y^(k)$ and the derivative of the softmax function w.r.t. each $W^{(j,k)}_{(L)}$
 	Note that this is similar to the derivatives computed for multi-class logistic regression
