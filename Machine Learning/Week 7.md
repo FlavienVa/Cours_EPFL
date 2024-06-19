@@ -5,7 +5,7 @@
 
 The solution to many ML algorithms ends up relying on a dot product between inputs, i.e., $$X_i^TX_j.$$
 When doing feature expansion, we then have dot products of the form $$ϕ(X_i)^T ϕ(X_j)$$ which also encodes a similarity between the two samples, but different from the original one. 
-Thus, instead of explicitly defining the mapping ϕ(), one can define a similarity function *k*(X_i,X_j)
+Thus, instead of explicitly defining the mapping ϕ(), one can define a similarity function $k(X_i,X_j)$
 
 This is called a *kernel function*. It correspond to some mapping ϕ(), but this ϕ() may be unknown. 
 
@@ -29,7 +29,7 @@ Since a kernel function corresponds to a similarity, as a dot product, one can r
 ### Kernelization: Notation 
 In what follows, with a small abuse of notation, I will also use the kernel function to encode the similarity between one sample and all the training samples, represented via the matrix X. This will give: $$k(X, x_i) = \begin{bmatrix} k(x_1, x_i) \\ k(x_2, x_i) \\ \vdots \\ k(x_N, x_i) \end{bmatrix} \in \mathbb{R}^N$$
 Furthermore, I will also use the notion of kernel matrix, in which each entry (i,j) contains the kernel function evaluated between training sample i and training sample j . This matrix is squared and can be written as: $$K = \begin{bmatrix} k(x_1, x_1) & k(x_1, x_2) & \cdots & k(x_1, x_N) \\ k(x_2, x_1) & k(x_2, x_2) & \cdots & k(x_2, x_N) \\ \vdots & \vdots & \ddots & \vdots \\ k(x_N, x_1) & k(x_N, x_2) & \cdots & k(x_N, x_N) \end{bmatrix} \in \mathbb{R}^{N \times N}$$As seen before, the solution to linear regression is given by: $$w^* = (\Phi^T\Phi)^{-1}\Phi^Ty\quad \quad \Phi = \begin{bmatrix} \phi(x_1)^T \\ \phi(x_2)^T \\ \vdots \\ \phi(x_N)^T \end{bmatrix} \in \mathbb{R}^{N \times F}$$
-At first sight, it may seem that Φ^TΦ contains the dot products that we want to replace with a kernel function. 
+At first sight, it may seem that $Φ^TΦ$ contains the dot products that we want to replace with a kernel function. 
 	However,this is an matrix **F x F** encoding dot products between the different feature dimensions, not the different samples
 	A kernel matrix, containing the dot products between every pair of training samples would be of size **N x N**, and correspond to (#problem)$$ΦΦ^T\quad not \;\;Φ^TΦ $$
 ## Kernelized versions of linear regression
@@ -48,7 +48,7 @@ Following the same reasoning as for linear regression, we can write this in matr
 For r a new sample x, the prediction is given by: $$\hat{y} =  \begin{aligned} (w^*)^T \phi(x)   &= y^T (K^{-1} \Phi) \phi(x) \\[1ex] &= y^T (K^{-1} k(X, x)) \end{aligned}$$
 Where k(X,x) is the N-dimensional vector obtained by evaluating the kernel function between the training samples and the test one. 
 
-Note that the quantity y^T(K^-1) only depends on the training data, and thus can be pre-computed (i.e., does not need to be re-computed for every test sample) :)
+Note that the quantity $y^T(K^{-1})$ only depends on the training data, and thus can be pre-computed (i.e., does not need to be re-computed for every test sample) :)
 
 ### Kernel ridge regression 
 That is, with the Representer theorem, the regularized empirical risk : 
@@ -59,7 +59,7 @@ Following the same reasoning as without regularizer, we can write the gradient o
 ### Kernel ridge regression with multiple outputs
 To handle nonlinear problems, we can then again work in a different feature space ϕ() and write the regularized empirical risk : $$E(W) = \begin{aligned} &\frac{1}{N} \sum_{i=1}^{N} \left\|W^T\phi(x_i) - y_i\right\|^2 + \lambda\|W\|_F^2 \\[1ex] \end{aligned}$$By making use of the Representer theorem, we can again derive a solution that does not explicitly depend on ϕ( ⋅ ) but rather on kernel values  k(xi , xj ). 
 Ultimately, the solution is given by: $$W^* = \begin{aligned} &\Phi^T (K + \lambda I)^{-1} Y \\[1ex] \end{aligned}$$
-Where Φ is the same matrix concatenating the training inputs {ϕ(x_i)} as in the 1D-output case, and Y € R^NxC is the matrix stacking the training output vectors. 
+Where Φ is the same matrix concatenating the training inputs {$ϕ(x_i)$} as in the 1D-output case, and Y € $R^{NxC}$ is the matrix stacking the training output vectors. 
 
 The prediction vector for a test sample is then given as: $$\hat{y} = \begin{aligned} &(W^*)^T \phi(x) \\[1ex] \end{aligned}$$
 $$  \begin{aligned}   &= Y^T (K + \lambda I)^{-1} \Phi \phi(x) \\[1ex] &= Y^T (K + \lambda I)^{-1} k(X, x) \end{aligned} $$
