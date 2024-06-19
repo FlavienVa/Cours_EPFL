@@ -114,7 +114,8 @@ By zeroing out the gradient, we obtain the solution
 
 ## Regularization 
 
-FAIRE UN RESUME ICI (parce que je comprends pas très bien ce que c'est)
+When we want to fit better our data but we don't have enough points (training points) we can add a term called the <u>Regularizer</u> (in this course) which will be a certain $\lambda$ times the square of the "inputs" (so it comes down to $w^Tw$) 
+--> great vidéo https://www.youtube.com/watch?v=Q81RR3yKn30&t=316s 
 
 Regularization may also be added to the cross-entropy loss used to train the logistic regression model
 - With a convex regularizer, such as the sum of squares, the overall regularized risk remains convex
