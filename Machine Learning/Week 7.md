@@ -21,6 +21,7 @@ For such kernels, the corresponding mappings ϕ() are known:
 Possibly the most common kernel is the **Gaussian kernel** (or Radial Basis Function (RBF)) $$k(X_i, X_j) = \exp\left(-\frac{||x_i-x_j||^2}{2\sigma^2}\right)$$
 It has only one hyper-parameter: 
 	The *bandwidth* σ
+And its mapping  ϕ() is <u>not known</u> !!! It maps from the original space to an **infinite-dimensional space** 
 
 ### Kernel trick
 Since a kernel function corresponds to a similarity, as a dot product, one can replace any dot product between two samples in the solution of an ML algorithm with a kernel function. This is applicable to many algorithms, and is referred to as *kernelizing* an algorithm. 
