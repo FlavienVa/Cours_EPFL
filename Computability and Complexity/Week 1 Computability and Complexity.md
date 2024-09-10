@@ -59,7 +59,14 @@ The + 1 is because we need one tape for the input at least. It can be + 2 if we 
 #### <u>Examples</u>
 VERY simple 
 1-tape Turing machine, $\Sigma$ = {0,1} adds a 0 at the end of its input 
-	|-|0|0|1|0|-|-|  to |-|0|0|1|0|0|-|
+
+| -   | 0   | 0   | 1   | 0   | -   | -   |
+| --- | --- | --- | --- | --- | --- | --- |
+to
+
+| -   | 0   | 0   | 1   | 0   | 0   | -   |
+| --- | --- | --- | --- | --- | --- | --- |
+
 
 So what is the transition function for that ?? 
 
@@ -98,7 +105,6 @@ Or translated to a graph (more easy to understand)
 graph TD 
 X1 & X2 -> X3 -> X4
 ```
-
 ```mehrmaid
 stateDiagram-v2
     [*] --> q0
@@ -108,10 +114,52 @@ stateDiagram-v2
     state qa <<accept>>
 ```
 ```mehrmaid 
-graph TD
-X1 -->|"$⊔ \rightarrow N$"| X2 
-X2 -->|"$⊔ \rightarrow N$"| X3  
+graph LR
+X1 -->|"$\  ⊔ \rightarrow N$"| X2 
+X2 -->|"$\ ⊔ \rightarrow N$"| X3  
 X1(("$q_0$"))
 X2(("$q_1$"))
 X3(("$q_a$"))
 ```
+He has shown way more complex examples that are way harder to understand and/or find on our own. *See slides*
+
+
+#### Mathematical definition Turing machine
+
+##### Set
+<u>Definition</u>
+Reclusively enumerable  / Semi-decidable 
+$\exists M pourToutw apartenant \Sigma^* w apartient A iff M accepts an input w$
+A language A is said to be recursively enumerable or re
+recognizable if there exists a Turing machine M such that the
+computation of M on the input w ends in the accepting configu-
+if and only if w ∈ A.
+
+<u>Definition</u> Recursive / decidable
+
+##### Function
+<u>Definition</u> Computable function $f : \ \Sigma^* \rightarrow \Sigma^*$
+
+
+#### Representation/Encoding of $N X N$
+Is finite because trivial merci 
+
+And then we can use a pretty code to encode it as $T(x+y)+y$
+$T(n) = n*(n+1)/2$
+
+#### Representation/Encoding of $\{0,1\}$
+Use ***BINARY REPRESENTATION***
+
+Okey no his one is a bit weird and we need to do more operation to just get to binary representation, because 000 is not the same as 00, because there are <u>words</u> and not just numbers.
+
+| $\Sigma$   | $N$ |
+| ---------- | --- |
+| $\epsilon$ | 0   |
+| 0          | 1   |
+| 1          | 2   |
+| 00         | 3   |
+| 01         | 4   |
+| 10         | 5   |
+| 11         | 6   |
+
+
