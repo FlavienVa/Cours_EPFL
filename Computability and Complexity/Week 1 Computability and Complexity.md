@@ -162,4 +162,65 @@ Okey no his one is a bit weird and we need to do more operation to just get to b
 | 10         | 5   |
 | 11         | 6   |
 
+--- 
+missing notes 
 
+-----------
+
+
+## Course 2 
+
+### Universal Turing Machine 
+Assume an enumeration of Turing Machines $M_0, M_1,M_2...$ 
+$U$ (being the universal Turing machine) receives as input $(m\star n)$, $m$ is the code of a Turing Machine and $n$ being the input 
+$$U(m\star n)\equiv M_m(n)$$
+Why is that useful ?? 
+- mathematical : understandability 
+- philosophical : in principle computers exist
+
+#### Universal Turing Machine of Marcin Minsky (1967)
+
+***Need to know all modules*** (for the test) 
+
+<u>Assumptions</u> on $M_n$
+- 1 tape, unidirectional 
+- $\Sigma = \Gamma = \{0,1\}$ (no blank space)
+- Transitions : (q,s,q',s',$M$)
+	- q : old state
+	- s :old symbol
+	- q' : new state
+	- s' : new symbol
+	- $M$ : movement 
+
+
+<u>Example</u> 
+```mehrmaid
+graph LR
+X1 -->|"$\  0 \rightarrow 1, R$"| X2 
+X1 -->|"$1 \rightarrow R$"| X1
+X1(("$q_0$"))
+X2(("$q_1$"))
+```
+
+![[Pasted image 20240913140545.png]]
+ Until the most right $X$ it's the *description* 
+ Then until the *Y* we have the *current state*
+ Then we have the pseudo-tape of *T*
+
+
+To construct the Marcin Minsky Machine we need many modules (which use this tape just above) 
+
+<u>Look for the correct state</u>
+![[Pasted image 20240913142012.png]]
+
+<u>Coping Module</U>
+![[Pasted image 20240913142104.png]]
+<u>The cleaning Module</u>
+![[Pasted image 20240913142140.png]]
+
+<u>The move module</u>
+![[Pasted image 20240913142212.png]]
+
+#### <u>EVERYTHING</u> (super Marcin)
+
+![[Pasted image 20240913143228.png]]
